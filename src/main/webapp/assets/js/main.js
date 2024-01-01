@@ -520,8 +520,11 @@
         $('#qty-result-text').text(qty.val());
     }
 
-
 });
+function showLoginModal() {
+      $('#loginModal').modal('show');
+  }
+
 
 $(window).on('load', function () {
     setTimeout(function () {

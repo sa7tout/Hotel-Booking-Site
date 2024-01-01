@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.io.*,java.util.*" %>
+<%@ page import="javax.servlet.*,javax.servlet.http.*" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,6 +41,11 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
     <![endif]-->
 </head>
 
@@ -48,99 +55,7 @@
 
     <div class="wrapper">
 
-        <header>
-
-            <!-- ======================== Navigation ======================== -->
-
-            <div class="container">
-
-                <!-- === navigation-top === -->
-
-                <nav class="navigation-top clearfix">
-
-                    <!-- navigation-top-left -->
-
-                    <div class="navigation-top-left">
-                        <a class="box" href="#">
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                        <a class="box" href="#">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                        <a class="box" href="#">
-                            <i class="fa fa-youtube"></i>
-                        </a>
-                    </div>
-
-                    <!-- navigation-top-right
-
-                    <div class="navigation-top-right">
-                        <a class="box" href="#">
-                            <i class="icon icon-star"></i>
-                            Special offers
-                        </a>
-                        <a class="box" href="reservation-1.jsp">
-                            <i class="icon icon-tag"></i>
-                            Reservations
-                        </a>
-                        <a class="box" href="#">
-                            <i class="icon icon-phone-handset"></i>
-                            (01) 252-3333
-                        </a>
-                    </div>-->
-                </nav>
-
-                <!-- === navigation-main === -->
-
-                <nav class="navigation-main clearfix">
-
-                    <!-- logo -->
-
-                    <div class="logo animated fadeIn">
-                        <a href="index.jsp">
-                            <img class="logo-desktop" src="assets/images/vagologo.png" alt="Alternate Text" />
-                        </a>
-                    </div>
-
-                    <!-- toggle-menu -->
-
-                    <div class="toggle-menu"><i class="icon icon-menu"></i></div>
-
-                    <!-- navigation-block -->
-
-                    <div class="navigation-block clearfix">
-
-                        <!-- navigation-left -->
-
-                        <ul class="navigation-left">
-                            <li>
-                                <a href="index.jsp">Home</a>
-                            </li>
-
-                            <li>
-                                <a href="bookingstep1.jsp">Booking</a>
-                            </li>
-
-                            <li>
-                                <a href="about.jsp">About us</a>
-
-                            </li>
-                        </ul>
-
-                        <!-- navigation-right -->
-
-                        <ul class="navigation-right">
-                            <li>
-                                <a href="contact.jsp">Contact</a>
-                            </li>
-                        </ul>
-
-                    </div> <!--/navigation-block-->
-
-                </nav>
-            </div> <!--/container-->
-
-        </header>
+        <%@ include file="header.jsp" %>
 
         <!-- ========================  Header content ======================== -->
 
@@ -658,51 +573,12 @@
 
         <!-- ================== Footer  ================== -->
 
-        <footer>
-            <div class="container">
-
-                <!--footer links-->
-               <!-- <div class="footer-links">
-                    <div class="row">
-                        <div class="col-sm-6 footer-left">
-                            <a href="#">Sitemap</a> &nbsp; | &nbsp; <a href="#">Privacy policy</a> | &nbsp; <a href="#">Guest book</a>
-                        </div>
-                        <div class="col-sm-6 footer-right">
-                            <a href="#">Gallery</a> &nbsp; | &nbsp; <a href="#">Reservations</a> | &nbsp; <a href="#">Help center</a>
-                        </div>
-                    </div>
-                </div>-->
-
-                <!--footer social-->
-
-                <div class="footer-social">
-                    <div class="row">
-                        <div class="col-sm-12 text-center hidden">
-                            <a href="" class="footer-logo"><img src="assets/images/vagologo-footer.png" alt="Alternate Text" /></a>
-                        </div>
-                        <div class="col-sm-12 icons">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-12 copyright">
-                            <small>VAGO HOTEL. Copyright &copy; 2023 &nbsp;</small>
-                        </div>
-                        <div class="col-sm-12 text-center">
-                            <img src="assets/images/vagologo-footer.png" alt="" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <%@ include file="footer.jsp" %>
 
     </div> <!--/wrapper-->
 
     <!--JS files-->
+    <%@ include file="loginmodal.jsp" %>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery-ui.js"></script>
     <script src="assets/js/jquery.bootstrap.js"></script>

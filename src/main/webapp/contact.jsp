@@ -47,83 +47,7 @@
 
     <div class="wrapper">
 
-        <header>
-
-            <!-- ======================== Navigation ======================== -->
-
-            <div class="container">
-
-                <!-- === navigation-top === -->
-
-                <nav class="navigation-top clearfix">
-
-                    <!-- navigation-top-left -->
-
-                    <div class="navigation-top-left">
-                        <a class="box" href="#">
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                        <a class="box" href="#">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                        <a class="box" href="#">
-                            <i class="fa fa-youtube"></i>
-                        </a>
-                    </div>
-
-                </nav>
-
-                <!-- === navigation-main === -->
-
-                <nav class="navigation-main clearfix">
-
-                    <!-- logo -->
-
-                    <div class="logo animated fadeIn">
-                        <a href="index.jsp">
-                            <img class="logo-desktop" src="assets/images/vagologo.png" alt="Alternate Text" />
-                        </a>
-                    </div>
-
-                    <!-- toggle-menu -->
-
-                    <div class="toggle-menu"><i class="icon icon-menu"></i></div>
-
-                    <!-- navigation-block -->
-
-                    <div class="navigation-block clearfix">
-
-                        <!-- navigation-left -->
-
-                        <ul class="navigation-left">
-                            <li>
-                                <a href="index.jsp">Home</a>
-                            </li>
-
-                            <li>
-                                <a href="booking.jsp">Booking</a>
-                            </li>
-
-                            <li>
-                                <a href="about.jsp">About us</a>
-
-                            </li>
-                        </ul>
-
-                        <!-- navigation-right -->
-
-                        <ul class="navigation-right">
-                            <li>
-                                <a href="contact.jsp">Contact</a>
-                            </li>
-                        </ul>
-
-                    </div> <!--/navigation-block-->
-
-                </nav>
-            </div> <!--/container-->
-
-        </header>
+        <%@ include file="header.jsp" %>
 
         <!-- ======================== Contact ======================== -->
 
@@ -275,47 +199,7 @@
 
         <!-- ================== Footer  ================== -->
 
-        <footer>
-            <div class="container">
-
-                <!--footer links-->
-                <!--<div class="footer-links">
-                    <div class="row">
-                        <div class="col-sm-6 footer-left">
-                            <a href="#">Sitemap</a> &nbsp; | &nbsp; <a href="#">Privacy policy</a> | &nbsp; <a href="#">Guest book</a>
-                        </div>
-                        <div class="col-sm-6 footer-right">
-                            <a href="#">Gallery</a> &nbsp; | &nbsp; <a href="#">Reservations</a> | &nbsp; <a href="#">Help center</a>
-                        </div>
-                    </div>
-                </div>-->
-
-                <!--footer social-->
-
-                <div class="footer-social">
-                    <div class="row">
-                        <div class="col-sm-12 text-center hidden">
-                            <a href="" class="footer-logo"><img src="../../../../../Documents/projetjava/javaproject/website%20ux/template/assets/images/logo.png" alt="Alternate Text" /></a>
-                        </div>
-                        <div class="col-sm-12 icons">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-12 copyright">
-                            <small>VAGO HOTEL. Copyright &copy; 2023 &nbsp;</small>
-                        </div>
-                        <div class="col-sm-12 text-center">
-                            <img src="../../../../../Documents/projetjava/javaproject/website%20ux/template/assets/images/logo-footer.png" alt="" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <%@ include file="footer.jsp" %>
 
     </div> <!--/wrapper-->
 

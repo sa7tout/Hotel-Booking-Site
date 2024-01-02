@@ -126,7 +126,7 @@
                 success: function (response) {
                     if (response.trim() === "success") {
                         // Authentication succeeded, redirect or perform other actions
-                        window.location.href = "index.jsp";
+                        location.reload();
                     } else {
                         // Authentication failed, show error message
                         $("#loginErrorContainer").html("Invalid credentials").show();

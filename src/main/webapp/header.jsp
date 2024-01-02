@@ -87,9 +87,6 @@
                         <a href="index.jsp">Home</a>
                     </li>
                     <li>
-                        <a href="bookingstep1.jsp">Booking</a>
-                    </li>
-                    <li>
                         <a href="about.jsp">About us</a>
                     </li>
                     <li>
@@ -101,5 +98,5 @@
 
         </nav>
     </div> <!--/container-->
-
+<%@ include file="loginmodal.jsp" %>
 </header>

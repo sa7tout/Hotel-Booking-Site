@@ -1,4 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -106,9 +108,9 @@
 
                                         <div class="login-wrapper">
 
-                                            <div class="white-block">
-
-                                                <!--signin-->
+                                               <% if (!(isLoggedIn != null && isLoggedIn)) { %>
+                                                  <!-- User is not logged in, show login and signup forms -->
+                                                  <!--signin-->
 
                                                 <div class="login-block login-block-signin">
 
@@ -214,6 +216,7 @@
 
                                                     </div>
                                                 </div> <!--/signup-->
+                                                <% } %>
                                             </div>
                                         </div> <!--/login-wrapper-->
                                     </div> <!--/col-md-6-->
@@ -228,14 +231,6 @@
                                             <hr />
 
                                             <span class="checkbox">
-                                                <input type="radio" id="paymentCart" name="paymentOption">
-                                                <label for="paymentCart">
-                                                    <strong>Pay via credit cart</strong> <br />
-                                                    <small>(MasterCard, Maestro, Visa, Visa Electron, JCB and American Express)</small>
-                                                </label>
-                                            </span>
-
-                                            <span class="checkbox">
                                                 <input type="radio" id="paymentPayPal" name="paymentOption">
                                                 <label for="paymentPayPal">
                                                     <strong>PayPal</strong> <br />
@@ -246,46 +241,6 @@
                                             <div class="payment payment-paypal">
                                                 <p><strong>Note:</strong></p>
                                                 <p>Please allow three working days for the payment confirmation to reflect in your <a href="#">online account</a>. Once your payment is confirmed, we will generate your e-invoice, which you can view/print from your account or email.</p>
-                                            </div>
-
-                                            <div class="payment payment-cart">
-
-                                                <div class="row">
-                                                    <div class="col-xs-12">
-                                                        <div class="payment-header">
-                                                            <div>
-                                                                <strong>Payment details</strong>
-                                                            </div>
-                                                            <div>
-                                                                <i class="fa fa-cc-visa"></i>
-                                                                <i class="fa fa-cc-mastercard"></i>
-                                                                <i class="fa fa-cc-discover"></i>
-                                                                <i class="fa fa-cc-amex"></i>
-                                                                <i class="fa fa-cc-diners-club"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-12">
-                                                        <div class="form-group">
-                                                            <input class="form-control" type="tel" value="" name="cardNumber" placeholder="Card Number" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-8">
-                                                        <div class="form-group">
-                                                            <input class="form-control" type="tel" value="" name="cardExpiry" placeholder="MM / YY" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-4">
-                                                        <div class="form-group">
-                                                            <input class="form-control" type="tel" value="" name="cardCVC" placeholder="CVC" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-12">
-                                                        <div class="form-group">
-                                                            <input class="btn btn-main btn-block" type="submit" value="Submit" name="cardNumber" />
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
 

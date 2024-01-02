@@ -1,4 +1,8 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.util.concurrent.TimeUnit" %>
 
 <%
     // Retrieve the selected room type from the session
@@ -9,6 +13,49 @@
         // Redirect to 404.jsp if the selected room type is null
         response.sendRedirect("404.jsp");
     }
+
+    String checkInDate = (String) session.getAttribute("checkInDate");
+    String checkOutDate = (String) session.getAttribute("checkOutDate");
+    String numGuests = (String) session.getAttribute("numGuests");
+
+    // Debugging statement to print retrieved values
+    System.out.println("Debug: checkInDate=" + checkInDate);
+    System.out.println("Debug: checkOutDate=" + checkOutDate);
+    System.out.println("Debug: numGuests=" + numGuests);
+    System.out.println("Debug: selectedRoomType=" + selectedRoomType);
+
+    // Function to calculate the number of nights
+    long nights = 0;
+    try {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date startDate = sdf.parse(checkInDate);
+        Date endDate = sdf.parse(checkOutDate);
+        nights = TimeUnit.DAYS.convert(endDate.getTime() - startDate.getTime(), TimeUnit.MILLISECONDS);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    // Set the price per night based on the room type
+    double pricePerNight = 0;
+    switch (selectedRoomType) {
+        case "StandardBookingRoom":
+            pricePerNight = 100;
+            break;
+        case "DeluxeBookingRoom":
+            pricePerNight = 150;
+            break;
+        case "SuiteBookingRoom":
+            pricePerNight = 200;
+            break;
+        // Add more cases for other room types if needed
+        default:
+            pricePerNight = 0; // Default price
+            break;
+    }
+
+    // Calculate the total price based on the number of guests and nights
+    double totalPrice = pricePerNight * Integer.parseInt(numGuests) * nights;
+    double totalPriceWithTax = totalPrice*1.07;
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -105,40 +152,46 @@
 
                         <div class="cart-wrapper">
 
-                            <!--cart header -->
-
-                            <div class="cart-block cart-block-header clearfix">
-                                <div>
-                                    <span>Room type</span>
-                                </div>
-                                <div class="text-right">
-                                    <span>Price</span>
-                                </div>
-                            </div>
-
                             <!--cart items-->
-
                             <div class="clearfix">
 
                                 <div class="cart-block cart-block-item clearfix">
                                     <div class="image">
-                                        <a href="room-overview.html"><img src="assets/images/room-4.jpg" alt="" /></a>
+                                        <!-- Dynamically display image based on the selected room type -->
+                                        <%
+                                            String imagePath = "";
+                                            switch (selectedRoomType) {
+                                                case "StandardBookingRoom":
+                                                    imagePath = "assets/images/vagoroom-1.jpg";
+                                                    break;
+                                                case "DeluxeBookingRoom":
+                                                    imagePath = "assets/images/vagoroom-2.jpg";
+                                                    break;
+                                                case "SuiteBookingRoom":
+                                                    imagePath = "assets/images/vagoroom-3.jpg";
+                                                    break;
+                                                default:
+                                                    imagePath = "path/to/default-room-image.jpg";
+                                                    break;
+                                            }
+                                        %>
+                                        <a href="<%= imagePath %>"><img src="<%= imagePath %>" alt="" /></a>
                                     </div>
                                     <div class="title">
-                                        <div class="h2"><a href="room-overview.html">Luxury appartment</a></div>
+                                        <div class="h2"><a href="room-overview.html"><%= selectedRoomType %></a></div>
                                         <p>
-                                            <strong>Arrival date</strong> <br /> <a href="#">(September 22, 2017)</a>
+                                            <strong>Arrival date</strong> <br /> <a href="#">(<%= checkInDate %>)</a>
                                         </p>
                                         <p>
-                                            <strong>Guests</strong> <br />  2 Adults, 1 Child
+                                            <strong>Guests</strong> <br /> <%= numGuests %> Guests
                                         </p>
                                         <p>
-                                            <strong>Nights</strong> <br /> 7
+                                            <strong>Nights</strong> <br /> <%= nights %>
                                         </p>
                                     </div>
                                     <div class="price">
-                                        <span class="final h3">$ 1.998</span>
-                                        <span class="discount">$ 2.666</span>
+                                        <!-- Display dynamically calculated total price -->
+                                        <span class="final h3"><%= totalPrice %>$</span>
                                     </div>
                                     <!--delete-this-item-->
                                     <span class="icon icon-cross icon-delete"></span>
@@ -151,19 +204,10 @@
                             <div class="clearfix">
                                 <div class="cart-block cart-block-footer clearfix">
                                     <div>
-                                        <strong>Discount 15%</strong>
-                                    </div>
-                                    <div>
-                                        <span>$ 159,00</span>
-                                    </div>
-                                </div>
-
-                                <div class="cart-block cart-block-footer clearfix">
-                                    <div>
                                         <strong>TAX</strong>
                                     </div>
                                     <div>
-                                        <span>$ 59,00</span>
+                                        <span> 7% </span>
                                     </div>
                                 </div>
                             </div>
@@ -180,7 +224,7 @@
                                         </span>
                                     </div>
                                     <div>
-                                        <div class="h2 title">$ 1259,00</div>
+                                        <div class="h2 title"><%= totalPriceWithTax %>$</div>
                                     </div>
                                 </div>
                             </div>
@@ -190,7 +234,7 @@
                             <div class="clearfix">
                                 <div class="cart-block cart-block-footer cart-block-footer-price clearfix">
                                     <div>
-                                        <a href="#" class="btn btn-clean-dark">Change</a>
+                                        <a href="rooms-category.jsp" class="btn btn-clean-dark">Change</a>
                                     </div>
                                     <div>
                                         <a href="bookingstep2.jsp" class="btn btn-main">Reservation <span class="icon icon-chevron-right"></span></a>

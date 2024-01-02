@@ -345,7 +345,7 @@
                             <div class="clearfix">
                                 <div class="cart-block cart-block-footer cart-block-footer-price clearfix">
                                     <div>
-                                        <a href="bookingstep1.jsp" class="btn btn-clean-dark">Back</a>
+                                        <a href="bookingstep2.jsp" class="btn btn-clean-dark">Back</a>
                                     </div>
                                     <div>
                                         <a onclick="window.print()" class="btn btn-main">Print <span class="icon icon-printer"></span></a>

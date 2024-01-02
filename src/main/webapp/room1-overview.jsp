@@ -210,9 +210,9 @@
                                 <!--=== button ===-->
 
                                 <div class="col-xs-12 col-sm-4">
-                                    <a href="bookingstep1.jsp" class="btn btn-clean">
-                                        Book now
-                                        <small>Best Prices Guaranteed</small>
+                                    <a href="#" class="btn btn-clean" onclick="bookNow()">
+                                                Book now
+                                                <small>Best Prices Guaranteed</small>
                                     </a>
                                 </div>
 
@@ -579,5 +579,74 @@
         <script src="assets/js/jquery.owl.carousel.js"></script>
         <script src="assets/js/main.js"></script>
     </body>
+
+
+    <script>
+            function formatDate(date) {
+                var d = new Date(date);
+                var year = d.getFullYear();
+                var month = ('0' + (d.getMonth() + 1)).slice(-2); // Months are zero-based
+                var day = ('0' + d.getDate()).slice(-2);
+                return year + '-' + month + '-' + day;
+            }
+
+            function formatDateFromElement(dateElement) {
+                // Get the date value from the date picker element
+                var dateValue = dateElement.parent().find('.date-value').text().trim();
+
+                // Split the date into day, month, and year parts
+                var parts = dateValue.split(' ');
+
+                // Map month abbreviations to numeric values (adjust as needed)
+                var monthMap = {
+                    'Jan': '01',
+                    'Feb': '02',
+                    'Mar': '03',
+                    'Apr': '04',
+                    'May': '05',
+                    'Jun': '06',
+                    'Jul': '07',
+                    'Aug': '08',
+                    'Sep': '09',
+                    'Oct': '10',
+                    'Nov': '11',
+                    'Dec': '12'
+                };
+
+                // Format the date as yyyy-mm-dd
+                var formattedDate = parts[2] + '-' + monthMap[parts[1]] + '-' + ('0' + parts[0]).slice(-2);
+
+                return formattedDate;
+            }
+
+            function bookNow() {
+                // Get the selected check-in date and format it
+                var checkInDate = formatDateFromElement($("#dateArrival"));
+
+                // Get the selected check-out date and format it
+                var checkOutDate = formatDateFromElement($("#dateDeparture"));
+
+                // Get the number of guests
+                var numGuests = document.getElementById("qty-result").value;
+
+                // Make an AJAX request to the servlet
+                $.ajax({
+                    type: "GET",
+                    url: "RoomBookingServlet",
+                    data: {
+                        checkInDate: checkInDate,
+                        checkOutDate: checkOutDate,
+                        numGuests: numGuests
+                    },
+                    success: function (response) {
+                        // Redirect to the booking page with the selected information
+                        window.location.href = "bookingstep1.jsp";
+                    },
+                    error: function (error) {
+                        console.log("Error:", error);
+                    }
+                });
+            }
+        </script>
 
 </html>

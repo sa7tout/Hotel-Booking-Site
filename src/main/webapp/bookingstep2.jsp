@@ -40,6 +40,10 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <!-- Include SweetAlert CSS and JS files -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@10"/>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     <![endif]-->
 </head>
 
@@ -77,7 +81,7 @@
                                 <a href="bookingstep2.jsp"><span data-text="Reservation"></span></a>
                             </li>
                             <li class="col-md-4">
-                                <a href="bookingstep3.jsp"><span data-text="Checkout"></span></a>
+                                <a href="bookingstep3.jsp" onclick="return checkLoginAndProceed();"><span data-text="Checkout"></span></a>
                             </li>
                         </ul>
                     </div>
@@ -339,7 +343,7 @@
                                         <a href="bookingstep1.jsp" class="btn btn-clean-dark">Back</a>
                                     </div>
                                     <div>
-                                        <a href="bookingstep3.jsp" class="btn btn-main">Checkout <span class="icon icon-chevron-right"></span></a>
+                                        <a href="bookingstep3.jsp" class="btn btn-main" onclick="return checkLoginAndProceed();">Checkout <span class="icon icon-chevron-right"></span></a>
                                     </div>
                                 </div>
                             </div>
@@ -385,6 +389,28 @@
     <script src="assets/js/jquery.magnific-popup.js"></script>
     <script src="assets/js/jquery.owl.carousel.js"></script>
     <script src="assets/js/main.js"></script>
+
+    <!-- Add the following script in the head section of your HTML -->
+    <script>
+        function checkLoginAndProceed() {
+            // Check if the user is logged in (you need to adjust this condition based on your actual login logic)
+            var isLoggedIn = <%= (isLoggedIn != null && isLoggedIn) %>;
+
+            // If the user is not logged in, show a SweetAlert error message
+            if (!isLoggedIn) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'You must be logged in to proceed. Please login or create an account.',
+                });
+                return false; // Prevent the default action (redirecting to the next page)
+            }
+
+            // If the user is logged in, proceed to the checkout page
+            return true;
+        }
+    </script>
+
 </body>
 
 </html>

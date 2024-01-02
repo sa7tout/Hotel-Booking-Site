@@ -54,16 +54,16 @@
                             <div class="login-block login-block-signup">
                                 <div class="h4">Register now <a href="javascript:void(0);" class="btn btn-main btn-xs btn-login pull-right">Log in</a></div>
                                 <hr />
-                                <form id="signupForm" action="guestController?action=createAccount" method="post" onsubmit="return submitSignupForm();">
+                                <form id="signupForm" action="createaccount" method="post" onsubmit="return submitSignupForm();">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First name: *" required>
+                                                <input type="text" id="firstName" name="first_name" class="form-control" placeholder="First name: *" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Last name: *" required>
+                                                <input type="text" id="lastName" name="last_name" class="form-control" placeholder="Last name: *" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -116,11 +116,13 @@
             var userId = $("#loginUserId").val();
             var password = $("#loginPassword").val();
 
+            // Check if Remember Me is selected
+            var rememberMe = $("#checkBoxId3").is(":checked");
             // Perform an asynchronous request to your server for authentication
             $.ajax({
                 type: "POST",
                 url: "loginServlet",
-                data: { loginUserId: userId, loginPassword: password },
+                data: { loginUserId: userId, loginPassword: password, rememberMe: rememberMe },
                 success: function (response) {
                     if (response.trim() === "success") {
                         // Authentication succeeded, redirect or perform other actions
@@ -180,10 +182,36 @@
                 return false;
             }
 
-            // Your additional logic can go here
+            // Perform an asynchronous request to your server for registration
+            $.ajax({
+                type: "POST",
+                url: "createaccount",  // Adjust the URL as needed
+                data: $("#signupForm").serialize(),
+                success: function (response) {
+                    if (response.trim() === "success") {
+                        // Show alert on successful registration
+                        swal("Registration Successful", "You can now login!", "success");
 
-            return isValid;
+                        // Optionally, clear the form fields
+                        $("#firstName, #lastName, #email, #password, #retypePassword, #checkBoxId1, #checkBoxId2").val("");
+
+                        // Optionally, close the modal
+                        $("#loginModal").modal("hide");
+                    } else {
+                        // Registration failed, show error message
+                        $("#termsError").html('<div class="error-message" style="color: red;">Failed to create an account. Please try again.</div>');
+                    }
+                },
+                error: function () {
+                    // Handle AJAX error, show a generic error message
+                    $("#termsError").html('<div class="error-message" style="color: red;">An error occurred during registration. Please try again.</div>');
+                }
+            });
+
+            // Prevent the form from submitting immediately
+            return false;
         }
+
 
         function isValidEmail(email) {
             // Add your email validation logic here
@@ -198,6 +226,9 @@
             return strongPasswordRegex.test(password);
         }
     </script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/sweetalert/dist/sweetalert.css">
 
 
 

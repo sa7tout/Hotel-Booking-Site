@@ -211,18 +211,17 @@
     <script src="assets/js/jquery.owl.carousel.js"></script>
     <script src="assets/js/main.js"></script>
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_UQuWHzqyOqHbp4IeFE7-Fa8m41uMTRg&callback=initMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAogBiV4FoETo6yXhy_Cu4vXBZNXaRqRoE&callback=initMap"></script>
     <script>
         function initMap() {
             var contentString =
             '<div class="map-info-window">' +
-            '<p><img src="assets/images/logo-dark.png" alt=""></p>' +
-            '<p><strong>Colina Resort</strong></p>' +
+            '<p><img src="assets/images/vagologo.png" alt=""></p>' +
+            '<p><strong>VAGO Resort</strong></p>' +
             '<p><i class="fa fa-map-marker"></i> 200 12th Ave, New York, NY 10001, USA</p>' +
             '<p><i class="fa fa-phone"></i> +12 33 444 555</p>' +
             '<p><i class="fa fa-clock-o"></i> 10am - 6pm</p>' +
             '</div>';
-
             var infowindow = new google.maps.InfoWindow({
                 content: contentString
             });

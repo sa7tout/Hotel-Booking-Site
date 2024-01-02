@@ -12,7 +12,13 @@ public class GuestController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Existing code for handling GET requests
+        String action = request.getParameter("action");
+
+        if ("logout".equals(action)) {
+            handleLogout(request, response);
+        } else {
+            // Existing code for handling other GET requests
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -25,11 +31,20 @@ public class GuestController extends HttpServlet {
             // User is logged in
             // Inform in the JSP that the user is logged in
             request.setAttribute("isLoggedIn", true);
-            request.getRequestDispatcher("your-jsp-file.jsp").forward(request, response);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         } else {
             // User is not logged in
             // Handle the case when the user is not logged in
             response.sendRedirect("index.jsp?error=notLoggedIn");
         }
     }
+    private void handleLogout(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Perform logout actions, e.g., invalidate the session
+        request.getSession().invalidate();
+
+        // Redirect to the index.jsp or any other desired page after logout
+        response.sendRedirect("index.jsp");
+    }
+
 }

@@ -258,7 +258,7 @@
                         <!--=== button ===-->
 
                         <div class="col-xs-12 col-sm-4">
-                            <a href="reservation-1.jsp" class="btn btn-clean">
+                            <a href="rooms-category.jsp" class="btn btn-clean">
                                 Book now
                                 <small>Best Prices Guaranteed</small>
                             </a>
@@ -297,12 +297,12 @@
                             </div>
                             <div class="details">
                                 <div class="text">
-                                    <h3 class="title"><a href="room-overview.jsp">Standard Room</a></h3>
+                                    <h3 class="title"><a href="room1-overview.jsp">Standard Room</a></h3>
                                     <p>Single room, Essential.</p>
                                 </div>
                                 <div class="book">
                                     <div>
-                                        <a href="room-overview.jsp" class="btn btn-main">Book now</a>
+                                        <a href="room1-overview.jsp" class="btn btn-main">Book now</a>
                                     </div>
                                     <div>
                                         <span class="price h4">$ 100,00</span>
@@ -322,12 +322,12 @@
                             </div>
                             <div class="details">
                                 <div class="text">
-                                    <h3 class="title"><a href="room-overview.jsp">Deluxe Room</a></h3>
+                                    <h3 class="title"><a href="room2-overview.jsp">Deluxe Room</a></h3>
                                     <p>Double room, Enhanced and Superior.</p>
                                 </div>
                                 <div class="book">
                                     <div>
-                                        <a href="room-overview.jsp" class="btn btn-main">Book now</a>
+                                        <a href="room2-overview.jsp" class="btn btn-main">Book now</a>
                                     </div>
                                     <div>
                                         <span class="price h4">$ 150,00</span>
@@ -352,7 +352,7 @@
                                 </div>
                                 <div class="book">
                                     <div>
-                                        <a href="room-overview.jsp" class="btn btn-main">Book now</a>
+                                        <a href="room3-overview.jsp" class="btn btn-main">Book now</a>
                                     </div>
                                     <div>
                                         <span class="price h4">$ 200,00</span>
@@ -379,7 +379,7 @@
 
             <div class="section-header">
                 <div class="container">
-                    <h2 class="title">Resort facilities <a class="btn btn-sm btn-clean-dark">Explore more</a></h2>
+                    <h2 class="title">Resort facilities</h2>
                     <p>
                         With the best luxury spa, salon and fitness experiences
                     </p>

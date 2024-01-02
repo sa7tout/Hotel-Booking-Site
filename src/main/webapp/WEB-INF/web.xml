@@ -13,6 +13,11 @@
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>com.hotelweb.LoginServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>RegisterServlet</servlet-name>
+    <servlet-class>com.hotelweb.RegisterServlet</servlet-class>
+  </servlet>
+
 
   <servlet-mapping>
     <servlet-name>GuestController</servlet-name>
@@ -21,5 +26,9 @@
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/loginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RegisterServlet</servlet-name>
+    <url-pattern>/createaccount</url-pattern>
   </servlet-mapping>
 </web-app>

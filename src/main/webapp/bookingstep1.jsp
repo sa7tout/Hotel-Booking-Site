@@ -1,4 +1,15 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%
+    // Retrieve the selected room type from the session
+    String selectedRoomType = (String) session.getAttribute("selectedRoomType");
+
+    // Check if the room type is not null
+    if (selectedRoomType == null) {
+        // Redirect to 404.jsp if the selected room type is null
+        response.sendRedirect("404.jsp");
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 

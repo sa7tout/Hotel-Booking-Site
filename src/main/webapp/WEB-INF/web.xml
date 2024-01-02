@@ -17,6 +17,14 @@
     <servlet-name>RegisterServlet</servlet-name>
     <servlet-class>com.hotelweb.RegisterServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>RoomController</servlet-name>
+    <servlet-class>com.hotelweb.RoomController</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>RoomBookingServlet</servlet-name>
+    <servlet-class>com.hotelweb.RoomBookingServlet</servlet-class>
+  </servlet>
 
 
   <servlet-mapping>
@@ -28,7 +36,11 @@
     <url-pattern>/loginServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>RegisterServlet</servlet-name>
-    <url-pattern>/createaccount</url-pattern>
+    <servlet-name>RoomController</servlet-name>
+    <url-pattern>/room_overview</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RoomBookingServlet</servlet-name>
+    <url-pattern>/rooms-category</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -1,6 +1,18 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.io.*,java.util.*" %>
 <%@ page import="javax.servlet.*,javax.servlet.http.*" %>
+
+<%
+
+    String checkInDate = (String) session.getAttribute("checkInDate");
+    String checkOutDate = (String) session.getAttribute("checkOutDate");
+    String numGuests = (String) session.getAttribute("numGuests");
+
+      // Debugging statement to print retrieved values
+        System.out.println("Debug: checkInDate=" + checkInDate);
+        System.out.println("Debug: checkOutDate=" + checkOutDate);
+        System.out.println("Debug: numGuests=" + numGuests);
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -91,7 +103,7 @@
                                         </div>
                                         <div class="book">
                                             <div>
-                                                <a href="bookingstep1.jsp" class="btn btn-main">Book now</a>
+                                                <a href="RoomController?roomType=StandardBookingRoom" class="btn btn-main">Book now</a>
                                             </div>
                                             <div>
                                                 <span class="price h4">$ 100,00</span>
@@ -116,7 +128,7 @@
                                         </div>
                                         <div class="book">
                                             <div>
-                                                <a href="room-overview.jsp" class="btn btn-main">Book now</a>
+                                                <a href="RoomController?roomType=DeluxeBookingRoom" class="btn btn-main">Book now</a>
                                             </div>
                                             <div>
                                                 <span class="price h4">$ 150,00</span>
@@ -141,7 +153,7 @@
                                     </div>
                                     <div class="book">
                                         <div>
-                                            <a href="room-overview.jsp" class="btn btn-main">Book now</a>
+                                            <a href="RoomController?roomType=SuiteBookingRoom" class="btn btn-main">Book now</a>
                                         </div>
                                         <div>
                                             <span class="price h4">$ 200,00</span>

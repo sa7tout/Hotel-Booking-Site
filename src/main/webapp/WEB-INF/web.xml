@@ -25,6 +25,10 @@
     <servlet-name>RoomBookingServlet</servlet-name>
     <servlet-class>com.hotelweb.RoomBookingServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ReservationServlet</servlet-name>
+    <servlet-class>com.hotelweb.ReservationServlet</servlet-class>
+  </servlet>
 
 
   <servlet-mapping>
@@ -42,5 +46,9 @@
   <servlet-mapping>
     <servlet-name>RoomBookingServlet</servlet-name>
     <url-pattern>/rooms-category</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ReservationServlet</servlet-name>
+    <url-pattern>/booking</url-pattern>
   </servlet-mapping>
 </web-app>

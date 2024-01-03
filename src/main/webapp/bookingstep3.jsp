@@ -1,4 +1,22 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="com.hotelweb.Booking" %>
+
+
+<%
+    // Retrieve the Booking object from the session
+    Booking booking = (Booking) session.getAttribute("booking");
+
+    // Retrieve the isLoggedIn attribute from the session
+    Boolean LoggedIn = (Boolean) session.getAttribute("isLoggedIn");
+
+    // Check if the Booking object is not null and the user is logged in
+    if (LoggedIn == null || booking == null) {
+        // Handle the case where the Booking object is not found or the user is not logged in
+        response.sendRedirect("404.jsp");
+    }
+    // Now you can use the booking object as needed in your page
+%>
 <!DOCTYPE html>
 <html lang="en">
 

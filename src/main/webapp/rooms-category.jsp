@@ -8,10 +8,6 @@
     String checkOutDate = (String) session.getAttribute("checkOutDate");
     String numGuests = (String) session.getAttribute("numGuests");
 
-      // Debugging statement to print retrieved values
-        System.out.println("Debug: checkInDate=" + checkInDate);
-        System.out.println("Debug: checkOutDate=" + checkOutDate);
-        System.out.println("Debug: numGuests=" + numGuests);
 %>
 <!DOCTYPE html>
 <html lang="en">

@@ -18,12 +18,6 @@
     String checkOutDate = (String) session.getAttribute("checkOutDate");
     String numGuests = (String) session.getAttribute("numGuests");
 
-    // Debugging statement to print retrieved values
-    System.out.println("Debug: checkInDate=" + checkInDate);
-    System.out.println("Debug: checkOutDate=" + checkOutDate);
-    System.out.println("Debug: numGuests=" + numGuests);
-    System.out.println("Debug: selectedRoomType=" + selectedRoomType);
-
     // Function to calculate the number of nights
     long nights = 0;
     try {
@@ -39,12 +33,15 @@
     double pricePerNight = 0;
     switch (selectedRoomType) {
         case "StandardBookingRoom":
+        case "Standard":
             pricePerNight = 100;
             break;
         case "DeluxeBookingRoom":
+        case "Deluxe":
             pricePerNight = 150;
             break;
         case "SuiteBookingRoom":
+        case "Suite":
             pricePerNight = 200;
             break;
         // Add more cases for other room types if needed
@@ -56,6 +53,7 @@
     // Calculate the total price based on the number of guests and nights
     double totalPrice = pricePerNight * Integer.parseInt(numGuests) * nights;
     double totalPriceWithTax = totalPrice*1.07;
+
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -162,12 +160,15 @@
                                             String imagePath = "";
                                             switch (selectedRoomType) {
                                                 case "StandardBookingRoom":
+                                                case "Standard":
                                                     imagePath = "assets/images/vagoroom-1.jpg";
                                                     break;
                                                 case "DeluxeBookingRoom":
+                                                case "Deluxe":
                                                     imagePath = "assets/images/vagoroom-2.jpg";
                                                     break;
                                                 case "SuiteBookingRoom":
+                                                case "Suite":
                                                     imagePath = "assets/images/vagoroom-3.jpg";
                                                     break;
                                                 default:
@@ -230,14 +231,13 @@
                             </div>
 
                             <!-- ========================  Cart navigation ======================== -->
-
                             <div class="clearfix">
                                 <div class="cart-block cart-block-footer cart-block-footer-price clearfix">
                                     <div>
                                         <a href="rooms-category.jsp" class="btn btn-clean-dark">Change</a>
                                     </div>
                                     <div>
-                                        <a href="bookingstep2.jsp" class="btn btn-main">Reservation <span class="icon icon-chevron-right"></span></a>
+                                        <button class="btn btn-main" id="reservationButton">Reservation <span class="icon icon-chevron-right"></span></button>
                                     </div>
                                 </div>
                             </div>
@@ -282,6 +282,32 @@
     <script src="assets/js/jquery.magnific-popup.js"></script>
     <script src="assets/js/jquery.owl.carousel.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#reservationButton").on("click", function () {
+                // Make an AJAX call to the ReservationServlet
+                $.ajax({
+                    type: "POST",
+                    url: "ReservationServlet",
+                    data: {
+                        selectedRoomType: "<%= selectedRoomType %>",
+                        checkInDate: "<%= checkInDate %>",
+                        checkOutDate: "<%= checkOutDate %>",
+                        numGuests: "<%= numGuests %>"
+                    },
+                    success: function (data) {
+                        console.log("AJAX call successful. Response data:", data);
+                        window.location.href = "bookingstep2.jsp";
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("AJAX error: " + status + " - " + error);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

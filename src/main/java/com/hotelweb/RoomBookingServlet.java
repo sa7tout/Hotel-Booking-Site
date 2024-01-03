@@ -19,11 +19,6 @@ public class RoomBookingServlet extends HttpServlet {
         String checkOutDate = request.getParameter("checkOutDate");
         String numGuests = request.getParameter("numGuests");
 
-        // Debugging statements
-        System.out.println("Debug: checkInDate=" + checkInDate);
-        System.out.println("Debug: checkOutDate=" + checkOutDate);
-        System.out.println("Debug: numGuests=" + numGuests);
-
         // Store the parameters in the session for later retrieval
         HttpSession session = request.getSession();
         session.setAttribute("checkInDate", checkInDate);

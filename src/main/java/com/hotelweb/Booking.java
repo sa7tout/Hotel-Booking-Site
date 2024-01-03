@@ -15,6 +15,7 @@ public class Booking {
     private double totalPriceWithTax;
 
     private String userId;
+    private int roomNumber;
 
     // Constructor
     public Booking(String selectedRoomType, String checkInDate, String checkOutDate, String numGuests) {
@@ -124,5 +125,13 @@ public class Booking {
 
     private void calculateTotalPriceWithTax() {
         totalPriceWithTax = totalPrice * 1.07;
+    }
+
+    public int getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
     }
 }

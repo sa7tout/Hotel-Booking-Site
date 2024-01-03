@@ -4,6 +4,7 @@
 
 
 <%
+    String selectedRoomType = (String) session.getAttribute("selectedRoomType");
     // Retrieve the Booking object from the session
     Booking booking = (Booking) session.getAttribute("booking");
 
@@ -199,7 +200,7 @@
                                     <!-- Dynamically display image based on the selected room type -->
                                         <%
                                             String imagePath = "";
-                                            switch (booking.getSelectedRoomType()) {
+                                            switch (selectedRoomType) {
                                                 case "StandardBookingRoom":
                                                 case "Standard":
                                                     imagePath = "assets/images/vagoroom-1.jpg";

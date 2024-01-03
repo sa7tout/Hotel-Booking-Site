@@ -14,9 +14,16 @@
     if (LoggedIn == null || booking == null) {
         // Handle the case where the Booking object is not found or the user is not logged in
         response.sendRedirect("404.jsp");
+    } else {
+        // Set the userId attribute of the Booking object if the user is logged in
+        String userId = (String) session.getAttribute("userId");
+        if (userId != null) {
+            booking.setUserId(userId);
+        }
     }
     // Now you can use the booking object as needed in your page
 %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -132,8 +139,15 @@
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <strong>Name</strong> <br />
-                                                        <span>John Doe</span>
+                                                        <strong>First Name</strong> <br />
+                                                        <span>John</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <strong>Last Name</strong> <br />
+                                                        <span>Doe</span>
                                                     </div>
                                                 </div>
 
@@ -141,48 +155,6 @@
                                                     <div class="form-group">
                                                         <strong>Email</strong><br />
                                                         <span>johndoe@company.com</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <strong>Phone</strong><br />
-                                                        <span>+122 523 352</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <strong>Zip</strong><br />
-                                                        <span>94107</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <strong>City</strong><br />
-                                                        <span>San Francisco, California</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <strong>Address</strong><br />
-                                                        <span>795 Folsom Ave, Suite 600</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <strong>Company name</strong><br />
-                                                        <span>Your company name</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <strong>Company phone</strong><br />
-                                                        <span>+122 333 6665</span>
                                                     </div>
                                                 </div>
 
@@ -212,22 +184,8 @@
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <strong>Transaction ID</strong> <br />
-                                                        <span>2265996</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
                                                         <strong>Order date</strong> <br />
                                                         <span>06/30/2017</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <strong>Shipping arrival</strong> <br />
-                                                        <span>07/30/2017</span>
                                                     </div>
                                                 </div>
 
@@ -253,12 +211,10 @@
                                                     </div>
                                                 </div>
 
-
-
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <strong>Cart details</strong><br />
-                                                        <span>**** **** **** 5446</span>
+                                                        <strong>Paypal</strong><br />
+                                                        <span>guest.paypal@email.com</span>
                                                     </div>
                                                 </div>
 
@@ -283,7 +239,6 @@
                         <div class="cart-wrapper">
 
                             <!--cart header -->
-
                             <div class="cart-block cart-block-header clearfix">
                                 <div>
                                     <span>Room type</span>
@@ -294,66 +249,73 @@
                             </div>
 
                             <!--cart items-->
-
                             <div class="clearfix">
-
                                 <div class="cart-block cart-block-item clearfix">
                                     <div class="image">
-                                        <a href="room-overview.html"><img src="assets/images/room-4.jpg" alt="" /></a>
+                                    <!-- Dynamically display image based on the selected room type -->
+                                        <%
+                                            String imagePath = "";
+                                            switch (booking.getSelectedRoomType()) {
+                                                case "StandardBookingRoom":
+                                                case "Standard":
+                                                    imagePath = "assets/images/vagoroom-1.jpg";
+                                                    break;
+                                                case "DeluxeBookingRoom":
+                                                case "Deluxe":
+                                                    imagePath = "assets/images/vagoroom-2.jpg";
+                                                    break;
+                                                case "SuiteBookingRoom":
+                                                case "Suite":
+                                                    imagePath = "assets/images/vagoroom-3.jpg";
+                                                    break;
+                                                default:
+                                                    imagePath = "path/to/default-room-image.jpg";
+                                                    break;
+                                            }
+                                        %>
+                                        <a href="room-overview.html"><img src="<%= imagePath %>" alt="" /></a>
                                     </div>
                                     <div class="title">
-                                        <div class="h2"><a href="room-overview.html">Luxury appartment</a></div>
+                                        <div class="h2"><a href="room-overview.html"><%= booking.getSelectedRoomType() %></a></div>
                                         <div>
-                                            <strong>Arrival date</strong> <a href="#">(September 22, 2017)</a>
+                                            <strong>Arrival date</strong><br /> <a href="#">(<%= booking.getCheckInDate() %>)</a>
                                         </div>
                                         <div>
-                                            <strong>Guests</strong> 2 Adults, 1 Child
+                                            <strong>Guests</strong><br /> <%= booking.getNumGuests() %>
                                         </div>
                                         <div>
-                                            <strong>Nights</strong> 7
+                                            <strong>Nights</strong> <br /> <%= booking.getNights() %>
                                         </div>
                                     </div>
                                     <div class="price">
-                                        <span class="final h3">$ 1.998</span>
-                                        <span class="discount">$ 2.666</span>
+                                        <span class="final h3">$ <%= booking.getTotalPrice() %></span>
+                                        <!-- Add discount and delete-this-item if needed -->
                                     </div>
                                     <!--delete-this-item-->
-                                    <span class="icon icon-cross icon-delete"></span>
+                                    <!-- Add a delete icon if needed -->
                                 </div>
-
                             </div>
 
                             <!--cart prices -->
-
                             <div class="clearfix">
-                                <div class="cart-block cart-block-footer clearfix">
-                                    <div>
-                                        <strong>Discount 15%</strong>
-                                    </div>
-                                    <div>
-                                        <span>$ 159,00</span>
-                                    </div>
-                                </div>
-
                                 <div class="cart-block cart-block-footer clearfix">
                                     <div>
                                         <strong>TAX</strong>
                                     </div>
                                     <div>
-                                        <span>$ 59,00</span>
+                                        <span> 7% </span>
                                     </div>
                                 </div>
                             </div>
 
                             <!--cart final price -->
-
                             <div class="clearfix">
                                 <div class="cart-block cart-block-footer cart-block-footer-price clearfix">
                                     <div>
                                         Promo code included!
                                     </div>
                                     <div>
-                                        <div class="h2 title">$ 1259,00</div>
+                                        <div class="h2 title">$ <%= booking.getTotalPriceWithTax() %></div>
                                     </div>
                                 </div>
                             </div>

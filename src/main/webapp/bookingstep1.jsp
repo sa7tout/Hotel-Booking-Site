@@ -299,7 +299,16 @@
                     },
                     success: function (data) {
                         console.log("AJAX call successful. Response data:", data);
-                        window.location.href = "bookingstep2.jsp";
+                        if (data === "success") {
+                            window.location.href = "bookingstep2.jsp";
+                        } else if (data === "noAvailableRoom") {
+                            // Display a SweetAlert to inform the user about no available room
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'No available room for the selected dates. Please choose different dates.',
+                            });
+                        }
                     },
                     error: function (xhr, status, error) {
                         console.error("AJAX error: " + status + " - " + error);
@@ -308,6 +317,7 @@
             });
         });
     </script>
+
 </body>
 
 </html>

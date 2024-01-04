@@ -95,30 +95,29 @@
                                                 <a class="btn btn-clean open-form" data-text-open="Contact us via form" data-text-close="Close form">Contact us via form</a>
 
                                                 <div class="contact-form clearfix">
-                                                    <form action="#" method="post">
+                                                    <form action="ContactServlet" method="post">
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <input type="text" value="" class="form-control" placeholder="Your name" required="required">
+                                                                    <input type="text" name="name" value="" class="form-control" placeholder="Your name" required="required">
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
-                                                                    <input type="email" value="" class="form-control" placeholder="Your email" required="required">
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-md-12">
-
-                                                                <div class="form-group">
-                                                                    <input type="text" value="" class="form-control" placeholder="Subject" required="required">
+                                                                    <input type="email" name="email" value="" class="form-control" placeholder="Your email" required="required">
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
-                                                                    <textarea class="form-control" placeholder="Your message" rows="10"></textarea>
+                                                                    <input type="text" name="subject" value="" class="form-control" placeholder="Subject" required="required">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <textarea name="message" class="form-control" placeholder="Your message" rows="10"></textarea>
                                                                 </div>
                                                             </div>
 
@@ -211,22 +210,23 @@
     <script src="assets/js/jquery.owl.carousel.js"></script>
     <script src="assets/js/main.js"></script>
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAogBiV4FoETo6yXhy_Cu4vXBZNXaRqRoE&callback=initMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNyuL-EreP8vw_wrSg8bPKJqhRzQsKcFE&callback=initMap"></script>
     <script>
         function initMap() {
             var contentString =
             '<div class="map-info-window">' +
             '<p><img src="assets/images/vagologo.png" alt=""></p>' +
-            '<p><strong>VAGO Resort</strong></p>' +
-            '<p><i class="fa fa-map-marker"></i> 200 12th Ave, New York, NY 10001, USA</p>' +
-            '<p><i class="fa fa-phone"></i> +12 33 444 555</p>' +
-            '<p><i class="fa fa-clock-o"></i> 10am - 6pm</p>' +
+            '<p><strong>Emsi </strong></p>' +
+            '<p><i class="fa fa-map-marker"></i>05 lot bouizgaren, Rte de Safi, Marrakech 40000,Morocco</p>' +
+            '<p><i class="fa fa-phone"></i> +212-524-422222 </p>' +
+            '<p><i class="fa fa-clock-o"></i> 8am - 6pm</p>' +
             '</div>';
+
             var infowindow = new google.maps.InfoWindow({
                 content: contentString
             });
             //set default pposition
-            var myLatLng = { lat: 40.7459772, lng: -74.0545504 };
+            var myLatLng = { lat: 31.663863512785333, lng: -8.020877654468464 };
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 12,
                 center: myLatLng,

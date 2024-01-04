@@ -35,8 +35,6 @@ public class ReservationServlet extends HttpServlet {
             session.setAttribute("booking", booking);
 
             response.getWriter().write("success");
-
-
         } else {
             // No available room found, handle accordingly (redirect to an error page or display a message)
             response.getWriter().write("noAvailableRoom");
@@ -50,10 +48,11 @@ public class ReservationServlet extends HttpServlet {
             List<Room> rooms = DbConnection.getAllRooms(connection);
 
             for (Room room : rooms) {
-                if (room.getRoomType().equals(selectedRoomType) &&
-                        room.getAvailabilityStatus().equals("available") &&
-                        isRoomAvailable(room.getRoomNumber(), checkInDate, checkOutDate)) {
-                    return room;
+                if (room.getRoomType().equals(selectedRoomType)) {
+                    if (room.getAvailabilityStatus().equals("Available") &&
+                            isRoomAvailable(room.getRoomNumber(), checkInDate, checkOutDate)) {
+                        return room;
+                    }
                 }
             }
         } finally {
@@ -61,6 +60,7 @@ public class ReservationServlet extends HttpServlet {
         }
         return null; // No available room found
     }
+
 
     private boolean isRoomAvailable(int roomNumber, String checkInDate, String checkOutDate) {
         Connection connection = null;
@@ -95,5 +95,6 @@ public class ReservationServlet extends HttpServlet {
         return !(end1.before(startDate2) || start1.after(endDate2));
     }
 }
+
 
 

@@ -15,7 +15,6 @@ public class RoomController extends HttpServlet {
             throws ServletException, IOException {
         // Get the room type from the clicked button
         String roomType = request.getParameter("roomType");
-
         // Store the room type in the session for later retrieval
         request.getSession().setAttribute("selectedRoomType", roomType);
 
@@ -32,12 +31,15 @@ public class RoomController extends HttpServlet {
                 nextPage = "room3-overview.jsp";
                 break;
             case "StandardBookingRoom":
+                request.getSession().setAttribute("selectedRoomType", "Standard");
                 nextPage = "bookingstep1.jsp";
                 break;
             case "DeluxeBookingRoom":
+                request.getSession().setAttribute("selectedRoomType", "Deluxe");
                 nextPage = "bookingstep1.jsp";
                 break;
             case "SuiteBookingRoom":
+                request.getSession().setAttribute("selectedRoomType", "Suite");
                 nextPage = "bookingstep1.jsp";
                 break;
 

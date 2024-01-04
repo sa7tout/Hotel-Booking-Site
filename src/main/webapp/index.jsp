@@ -16,7 +16,7 @@
     <!-- Meta tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="assets/images/favicon.ico">
 
     <!--Title-->
     <title>VAGO - Hotel, Resort & Accommodation Website Template</title>

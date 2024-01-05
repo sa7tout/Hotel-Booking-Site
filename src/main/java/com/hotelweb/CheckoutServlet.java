@@ -57,6 +57,18 @@ public class CheckoutServlet extends HttpServlet {
                 // Add the reservation to the session
                 session.setAttribute("reservation", reservation);
 
+                // Set the folder path where you want to store the PDF
+                String folderPath = getServletContext().getRealPath("/invoices");
+
+                // Generate a unique file name for the PDF
+                String fileName = "Invoice_" + System.currentTimeMillis() + ".pdf";
+
+                // Call the InvoiceGenerator to generate the PDF
+                InvoiceGenerator.generateInvoicePDF(guest, reservation, booking, folderPath, fileName);
+
+                String invoiceFilePath = folderPath + "\\" + fileName;
+                ReceiptSender.sendInvoiceEmail(guest, reservation, booking, invoiceFilePath);
+
                 // Redirect to a success page or display a success message
                 response.getWriter().write("success");
             } finally {

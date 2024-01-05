@@ -37,6 +37,10 @@
     <servlet-name>CheckoutServlet</servlet-name>
     <servlet-class>com.hotelweb.CheckoutServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ReceiptServlet</servlet-name>
+    <servlet-class>com.hotelweb.ReceiptSendingServlet</servlet-class>
+  </servlet>
 
 
   <servlet-mapping>
@@ -66,5 +70,9 @@
   <servlet-mapping>
     <servlet-name>CheckoutServlet</servlet-name>
     <url-pattern>/Checkout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ReceiptServlet</servlet-name>
+    <url-pattern>/Receipt</url-pattern>
   </servlet-mapping>
 </web-app>

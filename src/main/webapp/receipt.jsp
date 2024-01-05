@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="com.hotelweb.Booking" %>
 <%@ page import="com.hotelweb.Reservation" %>
@@ -27,10 +27,8 @@
     }
     // Now you can use the booking object as needed in your page
 %>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,7 +44,7 @@
     <link rel="icon" href="favicon.ico">
 
     <!--Title-->
-    <title>Reservation - 3 | VAGO - Hotel, Resort & Accommodation Website Template</title>
+    <title>BOOKING RECEIPT | VAGO hotel</title>
 
     <!--CSS styles-->
     <link rel="stylesheet" media="all" href="assets/css/bootstrap.css" />
@@ -67,54 +65,15 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <!-- Include SweetAlert CSS and JS files -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@10"/>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     <![endif]-->
 </head>
 
 <body>
-
-    <div class="page-loader"></div>
-
-    <div class="wrapper">
-
-        <%@ include file="header.jsp" %>
-
-        <!-- ========================  Checkout ======================== -->
-
-        <section class="page">
-
-            <!-- ===  Page header === -->
-
-            <div class="page-header" style="background-image:url(assets/images/header-1.jpg)">
-
-                <div class="container">
-                    <h2 class="title">Reservation completed</h2>
-                    <p>Thank you!</p>
-                </div>
-
-            </div>
-
-            <!-- ===  Step wrapper === -->
-
-            <div class="step-wrapper">
-                <div class="container">
-
-                    <div class="stepper">
-                        <ul class="row">
-                            <li class="col-md-4 active">
-                                <a href="bookingstep1.jsp"><span data-text="Room & rates"></span></a>
-                            </li>
-                            <li class="col-md-4 active">
-                                <a href="bookingstep2.jsp"><span data-text="Reservation"></span></a>
-                            </li>
-                            <li class="col-md-4 active">
-                                <a href="bookingstep3.jsp"><span data-text="Checkout"></span></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ===  Checkout === -->
+<!-- ===  Checkout === -->
 
             <div id="checkoutSection" class="checkout">
 
@@ -324,111 +283,11 @@
                                 </div>
                             </div>
 
-                            <!-- ========================  Cart navigation ======================== -->
-
-                            <div class="clearfix">
-                                <div class="cart-block cart-block-footer cart-block-footer-price clearfix">
-                                    <div>
-                                        <a href="bookingstep2.jsp" class="btn btn-clean-dark">Back</a>
-                                    </div>
-                                    <div>
-                                        <a href="javascript:void(0);" onclick="printJspFile('receipt.jsp')" class="btn btn-main">Print Receipt</a>
-
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
 
                 </div> <!--/container-->
             </div> <!--/checkout-->
-
-        </section>
-
-
-
-        <!-- ========================  Subscribe ======================== -->
-
-        <section class="subscribe">
-            <div class="container">
-                <div class="box">
-                    <h2 class="title">Subscribe</h2>
-                    <div class="text">
-                        <p>& receive free premium gifts</p>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" value="" placeholder="Subscribe" class="form-control" />
-                        <button class="btn btn-sm btn-main">Go</button>
-                    </div>
-                </div>
-            </div>
-        </section> 
-
-        <!-- ================== Footer  ================== -->
-
-        <%@ include file="footer.jsp" %>
-
-    </div> <!--/wrapper-->
-
-    <!--JS files-->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery-ui.js"></script>
-    <script src="assets/js/jquery.bootstrap.js"></script>
-    <script src="assets/js/jquery.magnific-popup.js"></script>
-    <script src="assets/js/jquery.owl.carousel.js"></script>
-    <script src="assets/js/main.js"></script>
-
-    <script>
-            // Function to format the date
-            function formatDate(date, includeTime = false) {
-                const options = {
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit',
-                    hour: 'numeric',
-                    minute: 'numeric'
-                };
-
-                const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
-
-                return includeTime ? formattedDate : formattedDate.split(' ')[0]; // Return only date without time
-            }
-
-            // Get the current local date
-            const currentDate = new Date();
-
-            // Display the formatted date with time in the specified span
-            document.getElementById('transactiontime').innerText = formatDate(currentDate, true);
-
-            // Display the formatted date in the specified span
-            document.getElementById('transactiondate').innerText = formatDate(currentDate);
-        </script>
-
-        <script>
-            function printJspFile(jspFilePath) {
-                // Open a new window for printing
-                var printWindow = window.open('', '_blank');
-
-                // Fetch the content of the JSP file
-                fetch(jspFilePath)
-                    .then(response => response.text())
-                    .then(jspContent => {
-                        // Write the HTML content to the new window
-                        printWindow.document.write(jspContent);
-
-                        // Close the document and initiate printing after the page is fully loaded
-                        printWindow.document.close();
-
-                        // Wait for the page to be fully loaded before initiating printing
-                        printWindow.addEventListener('DOMContentLoaded', function () {
-                            printWindow.print();
-                        });
-                    })
-                    .catch(error => console.error('Error fetching JSP content:', error));
-                }
-
-        </script>
 
 </body>
 

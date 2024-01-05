@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+
 @WebServlet(name = "LoginServlet", urlPatterns = "/loginServlet")
 public class LoginServlet extends HttpServlet {
 
@@ -30,6 +31,14 @@ public class LoginServlet extends HttpServlet {
 
             // Store additional user information in the session
             session.setAttribute("userId", userId); // You can add more user-related attributes as needed
+
+            Connection connection = DbConnection.getConnection();
+            String userEmail = (String) session.getAttribute("userId");
+            int guestId = DbConnection.getGuestIdByEmail(connection, userEmail);
+
+            Guest guest = DbConnection.getGuestById(connection, guestId);
+            session.setAttribute("guest", guest);
+            DbConnection.closeConnection();
 
 
             // Check if Remember Me is selected
@@ -80,7 +89,6 @@ public class LoginServlet extends HttpServlet {
                             String storedPassword = resultSet.getString("password");
                             // Return true if the password matches
                             boolean isAuthenticated = storedPassword.equals(password);
-
 
                             return isAuthenticated;
                         }

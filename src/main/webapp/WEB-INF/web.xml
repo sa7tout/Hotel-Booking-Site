@@ -33,6 +33,10 @@
     <servlet-name>ContactServlet</servlet-name>
     <servlet-class>com.hotelweb.ContactServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>CheckoutServlet</servlet-name>
+    <servlet-class>com.hotelweb.CheckoutServlet</servlet-class>
+  </servlet>
 
 
   <servlet-mapping>
@@ -58,5 +62,9 @@
   <servlet-mapping>
     <servlet-name>ContactServlet</servlet-name>
     <url-pattern>/Contact</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CheckoutServlet</servlet-name>
+    <url-pattern>/Checkout</url-pattern>
   </servlet-mapping>
 </web-app>

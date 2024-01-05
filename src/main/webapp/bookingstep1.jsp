@@ -7,16 +7,16 @@
 <%
     // Retrieve the selected room type from the session
     String selectedRoomType = (String) session.getAttribute("selectedRoomType");
-
-    // Check if the room type is not null
-    if (selectedRoomType == null) {
-        // Redirect to 404.jsp if the selected room type is null
-        response.sendRedirect("404.jsp");
-    }
-
     String checkInDate = (String) session.getAttribute("checkInDate");
     String checkOutDate = (String) session.getAttribute("checkOutDate");
     String numGuests = (String) session.getAttribute("numGuests");
+
+    // Check if the room type is not null
+    if (selectedRoomType == null || checkInDate == null || checkOutDate == null || numGuests == null) {
+        // Redirect to 404.jsp if the selected room type is null
+        response.sendRedirect("404.jsp");
+        return;
+    }
 
     // Function to calculate the number of nights
     long nights = 0;
@@ -90,6 +90,14 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,500&amp;subset=latin-ext" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700&amp;subset=latin-ext" rel="stylesheet">
 
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- SweetAlert2 CSS and JS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -97,8 +105,6 @@
     <!-- Include SweetAlert CSS and JS files -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@10"/>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <!-- Replace the existing link with this one -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
     <![endif]-->
 </head>
@@ -240,7 +246,27 @@
                             <div class="clearfix">
                                 <div class="cart-block cart-block-footer cart-block-footer-price clearfix">
                                     <div>
-                                        <a href="rooms-category.jsp" class="btn btn-clean-dark">Change</a>
+                                    <%
+                                        String roomoverviewlink = "";
+                                        switch (selectedRoomType) {
+                                            case "StandardBookingRoom":
+                                            case "Standard":
+                                                roomoverviewlink = "room1-overview.jsp";
+                                                break;
+                                            case "DeluxeBookingRoom":
+                                            case "Deluxe":
+                                                roomoverviewlink = "room2-overview.jsp";
+                                                break;
+                                            case "SuiteBookingRoom":
+                                            case "Suite":
+                                                roomoverviewlink = "room3-overview.jsp";
+                                                break;
+                                            default:
+                                                roomoverviewlink = "path/to/default-room-link.jsp";
+                                                break;
+                                        }
+                                    %>
+                                        <a href="<%=roomoverviewlink%>" class="btn btn-clean-dark">Change</a>
                                     </div>
                                     <div>
                                         <button class="btn btn-main" id="reservationButton">Reservation <span class="icon icon-chevron-right"></span></button>
@@ -281,14 +307,14 @@
 
     </div> <!--/wrapper-->
 
-    <!--JS files-->
+ <!--JS files-->
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery-ui.js"></script>
     <script src="assets/js/jquery.bootstrap.js"></script>
     <script src="assets/js/jquery.magnific-popup.js"></script>
     <script src="assets/js/jquery.owl.carousel.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script>
         $(document).ready(function () {

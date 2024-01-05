@@ -52,7 +52,7 @@ public class ContactServlet extends HttpServlet {
 
             // Set sender and recipient addresses
             message.setFrom(new InternetAddress(senderEmail));
-            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(senderEmail));
 
             // Set email subject and content
             message.setSubject(subject);

@@ -1,19 +1,23 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="com.hotelweb.Booking" %>
+<%@ page import="com.hotelweb.Reservation" %>
+<%@ page import="com.hotelweb.Guest" %>
 
 
 <%
-    // Retrieve the Booking object from the session
+    Guest guest = (Guest) session.getAttribute("guest");
+    Reservation lastreservation = (Reservation) session.getAttribute("reservation");
     Booking booking = (Booking) session.getAttribute("booking");
 
     // Retrieve the isLoggedIn attribute from the session
     Boolean LoggedIn = (Boolean) session.getAttribute("isLoggedIn");
 
     // Check if the Booking object is not null and the user is logged in
-    if (LoggedIn == null || booking == null) {
+    if (LoggedIn == null || lastreservation == null || booking == null || guest == null) {
         // Handle the case where the Booking object is not found or the user is not logged in
         response.sendRedirect("404.jsp");
+        return;
     } else {
         // Set the userId attribute of the Booking object if the user is logged in
         String userId = (String) session.getAttribute("userId");
@@ -140,21 +144,21 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <strong>First Name</strong> <br />
-                                                        <span>John</span>
+                                                        <span><%=guest.getFirstName()%></span>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <strong>Last Name</strong> <br />
-                                                        <span>Doe</span>
+                                                        <span><%=guest.getLastName()%></span>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <strong>Email</strong><br />
-                                                        <span>johndoe@company.com</span>
+                                                        <span><%=guest.getEmail()%></span>
                                                     </div>
                                                 </div>
 
@@ -177,15 +181,15 @@
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <strong>Order no.</strong> <br />
-                                                        <span>52522-63259226</span>
+                                                        <strong>Reservation no.</strong> <br />
+                                                        <span><%=lastreservation.getReferenceNumber()%></span>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <strong>Order date</strong> <br />
-                                                        <span>06/30/2017</span>
+                                                        <span id="transactiondate"></span>
                                                     </div>
                                                 </div>
 
@@ -200,14 +204,14 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <strong>Transaction time</strong> <br />
-                                                        <span>06/30/2017 at 00:59</span>
+                                                        <span id="transactiontime"></span>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <strong>Amount</strong><br />
-                                                        <span>$ 1259,00</span>
+                                                        <span>$ <%=booking.getTotalPrice()%></span>
                                                     </div>
                                                 </div>
 
@@ -221,7 +225,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <strong>Reservation type</strong><br />
-                                                        <span>Luxury Room</span>
+                                                        <span><%= booking.getSelectedRoomType() %></span>
                                                     </div>
                                                 </div>
 
@@ -273,15 +277,15 @@
                                                     break;
                                             }
                                         %>
-                                        <a href="room-overview.html"><img src="<%= imagePath %>" alt="" /></a>
+                                        <a href="rooms-category.jsp"><img src="<%= imagePath %>" alt="" /></a>
                                     </div>
                                     <div class="title">
                                         <div class="h2"><a href="room-overview.html"><%= booking.getSelectedRoomType() %></a></div>
                                         <div>
-                                            <strong>Arrival date</strong><br /> <a href="#">(<%= booking.getCheckInDate() %>)</a>
+                                            <strong>Arrival date</strong><br /> <a href="#">(<%= lastreservation.getCheckinDate() %>)</a>
                                         </div>
                                         <div>
-                                            <strong>Guests</strong><br /> <%= booking.getNumGuests() %>
+                                            <strong>Guests</strong><br /> <%= lastreservation.getNumberOfGuests() %>
                                         </div>
                                         <div>
                                             <strong>Nights</strong> <br /> <%= booking.getNights() %>
@@ -373,6 +377,32 @@
     <script src="assets/js/jquery.magnific-popup.js"></script>
     <script src="assets/js/jquery.owl.carousel.js"></script>
     <script src="assets/js/main.js"></script>
+
+    <script>
+            // Function to format the date
+            function formatDate(date, includeTime = false) {
+                const options = {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: 'numeric',
+                    minute: 'numeric'
+                };
+
+                const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
+
+                return includeTime ? formattedDate : formattedDate.split(' ')[0]; // Return only date without time
+            }
+
+            // Get the current local date
+            const currentDate = new Date();
+
+            // Display the formatted date with time in the specified span
+            document.getElementById('transactiontime').innerText = formatDate(currentDate, true);
+
+            // Display the formatted date in the specified span
+            document.getElementById('transactiondate').innerText = formatDate(currentDate);
+        </script>
 </body>
 
 </html>

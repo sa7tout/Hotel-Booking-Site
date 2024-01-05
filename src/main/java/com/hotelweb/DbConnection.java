@@ -81,6 +81,43 @@ public class DbConnection {
         return guestList;
     }
 
+    // Add this method to your DbConnection class
+    public static Guest getGuestById(Connection connection, int guestId) {
+        String query = "SELECT * FROM guests WHERE guest_id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, guestId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    String firstName = resultSet.getString("first_name");
+                    String lastName = resultSet.getString("last_name");
+                    String email = resultSet.getString("email");
+                    String password = resultSet.getString("password");
+
+                    return new Guest(firstName, lastName, email, password);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null; // Return null or handle appropriately if the guest is not found
+    }
+
+
+    public static int getGuestIdByEmail(Connection connection, String email) {
+        String query = "SELECT guest_id FROM guests WHERE email = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, email);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("guest_id");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0; // Return 0 or handle appropriately if the guest ID is not found
+    }
+
     public static List<Room> getAllRooms(Connection connection) {
         List<Room> roomList = new ArrayList<>();
         String query = "SELECT * FROM rooms";

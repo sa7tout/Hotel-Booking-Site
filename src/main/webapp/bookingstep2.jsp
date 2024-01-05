@@ -12,6 +12,7 @@
     if (booking == null) {
         // Handle the case where the Booking object is not found
         response.sendRedirect("404.jsp");
+        return;
     }
     // Now you can use the booking object as needed in your page
 %>
@@ -333,6 +334,17 @@
                 });
                 return false; // Prevent the default action (redirecting to the next page)
             }
+            $.ajax({
+                    type: 'POST',
+                    url: 'CheckoutServlet',
+                    success: function(response) {
+                        window.location.href = "bookingstep3.jsp";
+                    },
+                    error: function() {
+                        window.location.href = "404.jsp";
+                        return false;
+                    }
+                });
 
             // If the user is logged in, proceed to the checkout page
             return true;

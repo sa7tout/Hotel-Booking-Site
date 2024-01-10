@@ -239,7 +239,7 @@
                                         <a href="rooms-category.jsp"><img src="<%= imagePath %>" alt="" /></a>
                                     </div>
                                     <div class="title">
-                                        <div class="h2"><a href="room-overview.html"><%= booking.getSelectedRoomType() %></a></div>
+                                        <div class="h2"><%= booking.getSelectedRoomType() %></div>
                                         <div>
                                             <strong>Arrival date</strong><br /> <a href="#">(<%= lastreservation.getCheckinDate() %>)</a>
                                         </div>

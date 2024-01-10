@@ -69,6 +69,9 @@ public class CheckoutServlet extends HttpServlet {
                 String invoiceFilePath = folderPath + "\\" + fileName;
                 ReceiptSender.sendInvoiceEmail(guest, reservation, booking, invoiceFilePath);
 
+                // Schedule the room status update job
+                RoomStatusUpdater.scheduleRoomStatusUpdateJob();
+
                 // Redirect to a success page or display a success message
                 response.getWriter().write("success");
             } finally {

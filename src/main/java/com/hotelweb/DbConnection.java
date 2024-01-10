@@ -256,6 +256,57 @@ public class DbConnection {
         }
     }
 
+    public static List<Reservation> getReservationsByCheckinDate(Connection connection, Date checkinDate) {
+        List<Reservation> reservationList = new ArrayList<>();
+        String query = "SELECT * FROM reservations WHERE checkin_date = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setDate(1, checkinDate);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    // Retrieve reservation data and create Reservation objects
+                    // (similar to what you did in other methods)
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return reservationList;
+    }
+
+    public static List<Reservation> getReservationsByCheckoutDate(Connection connection, Date checkoutDate) {
+        List<Reservation> reservationList = new ArrayList<>();
+        String query = "SELECT * FROM reservations WHERE checkout_date = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setDate(1, checkoutDate);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    // Retrieve reservation data and create Reservation objects
+                    // (similar to what you did in other methods)
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return reservationList;
+    }
+
+    public static void updateRoomAvailabilityStatus(Connection connection, int roomNumber, String availabilityStatus) {
+        String query = "UPDATE rooms SET availability_status = ? WHERE room_number = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, availabilityStatus);
+            preparedStatement.setInt(2, roomNumber);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void closeConnection() {
         if (connection != null) {
             try {
